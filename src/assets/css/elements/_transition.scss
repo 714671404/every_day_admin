@@ -1,6 +1,13 @@
 .page-enter-active, .page-leave-active {
-    transition: opacity .5s;
+    transition: opacity .3s;
 }
 .page-enter, .page-leave-to {
     opacity: 0;
+}
+.fade-enter-active, .fade-leave-active {
+    height: 100px;
+    transition: height .5s;
+}
+.fade-enter-active, .fade-leave-active {
+    height: 0;
 }

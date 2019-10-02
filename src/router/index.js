@@ -4,7 +4,7 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const router = createRouter()
+const router = createRouter();
 
 export default router
 
