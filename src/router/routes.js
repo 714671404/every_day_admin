@@ -14,17 +14,26 @@ export default [
 			{
 				path: 'home',
 				name: 'home',
-				component: path('Home')
+				component: path('Home'),
+				meta: {
+					title: '首页'
+				}
 			},
 			{
 				path: 'about',
 				name: 'about',
-				component: path('About')
+				component: path('About'),
+				meta: {
+					title: '关于'
+				}
 			},
 			{
 				path: 'error',
 				name: 'error',
-				component: path('errors/error')
+				component: path('errors/error'),
+				meta: {
+					title: '页面不存在'
+				}
 			}
 		]
 	},

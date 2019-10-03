@@ -1,8 +1,11 @@
 <template>
-	<div class="sidebar">
+	<div class="sidebar" :class="{close: !sidebar_status}">
 		<div class="navbar-header">
 			<router-link to="/" class="log" v-show="sidebar_status">every day</router-link>
-			<button type="button" class="iconfont icon-more-line btn menu-button" @click="sidebar_update_status"></button>
+			<button type="button"
+					class="iconfont icon-more-line btn menu-button"
+					@click="sidebar_update_status"
+			></button>
 		</div>
 		<div class="navbar-content">
 			<ul class="nav">
@@ -11,7 +14,7 @@
 						<li :key="index">
 							<router-link :to="{path: menu_item.path}">
 								<i class="iconfont" :class="menu_item.left_class"></i>
-								<span>{{ menu_item.name }}</span>
+								<span v-show="sidebar_status">{{ menu_item.name }}</span>
 							</router-link>
 						</li>
 					</template>
@@ -19,31 +22,21 @@
 						<li :key="index" :class="{open: menu_items_status === index}">
 							<a href="javascript:void(0);" @click="nav_open(index)">
 								<i class="iconfont" :class="menu_item.left_class"></i>
-								<span>{{ menu_item.name }}</span>
-								<i class="iconfont icon-left-point" :class="{direction: menu_items_status === index}"></i>
+								<span v-show="sidebar_status">{{ menu_item.name }}</span>
+								<i v-show="sidebar_status"
+								   class="iconfont icon-left-point"
+								   :class="{direction: menu_items_status === index}"
+								></i>
 							</a>
-							<template v-if="sidebar_status">
-								<template v-if="menu_items_status === index">
-									<ul class="nav-menu">
-										<template v-for="(item, i) in menu_item.children">
-											<li :key="i">
-												<router-link :to="{path: item.path}">{{ item.name }}</router-link>
-											</li>
-										</template>
-									</ul>
-								</template>
+							<template v-if="menu_items_status === index">
+								<ul class="nav-menu">
+									<template v-for="(item, i) in menu_item.children">
+										<li :key="i">
+											<router-link :to="{path: item.path}">{{ item.name }}</router-link>
+										</li>
+									</template>
+								</ul>
 							</template>
-<!--							<template v-else>-->
-<!--								<template v-if="menu_items_status === index">-->
-<!--									<ul class="nav-menu-small">-->
-<!--										<template v-for="(item, i) in menu_item.children">-->
-<!--											<li :key="i">-->
-<!--												<router-link :to="{path: item.path}">{{ item.name }}</router-link>-->
-<!--											</li>-->
-<!--										</template>-->
-<!--									</ul>-->
-<!--								</template>-->
-<!--							</template>-->
 						</li>
 					</template>
 				</template>
@@ -101,6 +94,7 @@
 				this.menu_items_status = this.menu_items_status === index ? false : index
 			},
 			sidebar_update_status() {
+				this.menu_items_status = false;
 				this.$store.commit('sidebar_update_status')
 			}
 		}
