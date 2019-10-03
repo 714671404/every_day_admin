@@ -1,8 +1,8 @@
 <template>
 	<div class="sidebar">
 		<div class="navbar-header">
-			<router-link to="/" class="log">every day</router-link>
-			<button type="button" class="iconfont icon-more-line btn menu-button" @click="test_status = !test_status"></button>
+			<router-link to="/" class="log" v-show="sidebar_status">every day</router-link>
+			<button type="button" class="iconfont icon-more-line btn menu-button" @click="sidebar_update_status"></button>
 		</div>
 		<div class="navbar-content">
 			<ul class="nav">
@@ -22,15 +22,28 @@
 								<span>{{ menu_item.name }}</span>
 								<i class="iconfont icon-left-point" :class="{direction: menu_items_status === index}"></i>
 							</a>
-							<template v-if="menu_items_status === index">
-								<ul class="nav-menu">
-									<template v-for="(item, i) in menu_item.children">
-										<li :key="i">
-											<router-link :to="{path: item.path}">{{ item.name }}</router-link>
-										</li>
-									</template>
-								</ul>
+							<template v-if="sidebar_status">
+								<template v-if="menu_items_status === index">
+									<ul class="nav-menu">
+										<template v-for="(item, i) in menu_item.children">
+											<li :key="i">
+												<router-link :to="{path: item.path}">{{ item.name }}</router-link>
+											</li>
+										</template>
+									</ul>
+								</template>
 							</template>
+<!--							<template v-else>-->
+<!--								<template v-if="menu_items_status === index">-->
+<!--									<ul class="nav-menu-small">-->
+<!--										<template v-for="(item, i) in menu_item.children">-->
+<!--											<li :key="i">-->
+<!--												<router-link :to="{path: item.path}">{{ item.name }}</router-link>-->
+<!--											</li>-->
+<!--										</template>-->
+<!--									</ul>-->
+<!--								</template>-->
+<!--							</template>-->
 						</li>
 					</template>
 				</template>
@@ -39,10 +52,10 @@
 	</div>
 </template>
 <script>
+	import { mapState } from 'vuex'
 	export default {
 		name: 'sidebar',
 		data: () => ({
-			test_status: true,
 			menu_items_status: false,
 			menu_items: [
 				{path: '/', name: 'Home', left_class: 'icon-home-page', children: []},
@@ -75,9 +88,20 @@
 				{path: '/about', name: 'About', left_class: 'icon-home-page', children: []},
 			]
 		}),
+		computed: {
+			...mapState({
+				sidebar_status: state => state.sidebar.sidebar_status
+			})
+		},
 		methods: {
 			nav_open(index) {
+				if (!this.sidebar_status) {
+					this.$store.commit('sidebar_update_status')
+				}
 				this.menu_items_status = this.menu_items_status === index ? false : index
+			},
+			sidebar_update_status() {
+				this.$store.commit('sidebar_update_status')
 			}
 		}
 	}
