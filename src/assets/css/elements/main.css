@@ -249,5 +249,50 @@ body {
 	width: 400px;
 	margin: 0 auto;
 	background-color: #fff;
-
+	border-radius: 10px;
+	padding: 20px 10px;
+}
+.auth-content>.form {
+	margin: 10px;
+}
+.auth-content>.title {
+	font-size: 34px;
+	font-weight: 600;
+	font-family: "Shonar Bangla";
+	padding: 10px 0;
+}
+.control-layout {
+	padding: 10px 15px;
+	position: relative;
+	margin-bottom: 10px;
+}
+.control-layout>input, .control-layout>button {
+	/*display: block;*/
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	width: 100%;
+	color: #404040;
+}
+.control-layout>.btn-blue {
+	background: #3498db;
+	margin-bottom: -10px;
+}
+.control-layout>input:hover {
+	border: 1px solid #217dbb;
+}
+.control-layout>button:hover {
+	background: #217dbb;
+}
+.control-layout>.error {
+	position: absolute;
+	top: 52px;
+	left: 25px;
+}
+.error {
+	color: red;
+}
+.error-404 {
+	font-size: 26px;
+	padding: 15px;
 }

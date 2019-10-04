@@ -4,14 +4,20 @@
 			<div class="title">every day</div>
 			<div class="form">
 				<form @submit.prevent="login">
-					<div class="">
+					<div class="control-layout">
 						<input type="test" v-model="form.username" placeholder="请输账号">
+						<span class="error"
+							  v-show="true"
+						>账号不存在</span>
 					</div>
-					<div>
+					<div class="control-layout">
 						<input type="password" v-model="form.password" placeholder="请输密码">
+						<span class="error"
+							  v-show="true"
+						>密码不正确</span>
 					</div>
-					<div>
-						<button type="submit" class="btn btn-blue">提交</button>
+					<div class="control-layout">
+						<button type="submit" class="btn btn-blue">登录</button>
 					</div>
 				</form>
 			</div>
@@ -76,12 +82,12 @@
 			login() {
 
 			},
-			verification(values) {
+			// verification(values) {
 				// 验证字符串
-				if (values) {
-
-				}
-			}
+				// if (values) {
+				//
+				// }
+			// }
 		}
 	}
 </script>
