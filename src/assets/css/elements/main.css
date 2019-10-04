@@ -233,3 +233,21 @@ body {
 	background-color: #217dbb;
 	border-color: #1c699d;
 }
+
+/*
+	登录注册页面样式
+*/
+.auth {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+.auth>.auth-content {
+	width: 400px;
+	margin: 0 auto;
+	background-color: #fff;
+
+}
